@@ -1,0 +1,8 @@
+.select {
+    width: 100%;
+    color: rgb(0, 0, 0);
+
+    & option {
+        color: rgb(102, 102, 102);
+    }
+}
