@@ -8,6 +8,9 @@ import Input from './components/UI/input/Input';
 import TextArea from './components/UI/textarea/TextArea';
 import AdService from './components/API/AdService';
 import { useFetching } from './hooks/useFetching';
+import { getPageCount } from './components/utils/pages';
+import Pagination from './components/UI/pagination/Pagination';
+import AdsLimit from './components/AdsLimit';
 
 interface addNewAdProps {
   imageUrl: string;
@@ -21,13 +24,21 @@ const App = () => {
   const [ads, setAds] = useState<Advertisment[]>([]);
   const [modalActive, setModalActive] = useState(false);
   const [newAd, setNewAd] = useState({imageUrl: '', name: '', description: '', price: ''});
-  const [fetchAds, isAdsLoading, adsError] = useFetching(async () => {
-    const ads = await AdService.getAll();
-    setAds(ads);
+
+  const [totalPages, setTotalPages] = useState(0);
+  const [page, setPage] = useState(1);
+  const [limit, setLimit] = useState(10);
+
+  const [fetchAds, isAdsLoading, adsError] = useFetching(async (page: number, limit: number) => {
+    const response = await AdService.getAll(page, limit);
+    
+    setAds(response.data);
+    const totalCount = response.items;
+    setTotalPages(getPageCount(totalCount, limit));
   })
 
-  const addNewAd = ({imageUrl, name, description, price}: addNewAdProps) => {
-    fetch('http://localhost:3000/advertisements', {
+  const addNewAd = async ({imageUrl, name, description, price}: addNewAdProps) => {
+    await fetch('http://localhost:3001/advertisements', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8'
@@ -42,10 +53,26 @@ const App = () => {
           "imageUrl": imageUrl ? imageUrl: ""
         })
     });
+    if (ads.length < 10) {
+      setAds([...ads, {
+        "id": String(ads.length),
+        "name": name,
+        "description": description ? description : "",
+        "price": parseInt(price),
+        "createdAt": String(new Date()), //"2024-08-12T12:16:55.351Z"
+        "views": 0,
+        "likes": 0,
+        "imageUrl": imageUrl ? imageUrl: ""
+      }]);
+    } else {
+      const response = await AdService.getAll(page, limit);
+      const totalCount = response.items;
+      setTotalPages(getPageCount(totalCount, limit));
+    }
   }
 
   useEffect(() => {
-    fetchAds();
+    fetchAds(page, limit);
   }, [])
 
   const sendNewAd = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -57,10 +84,23 @@ const App = () => {
       setModalActive(false);
   }
 
+  const changePage = (page: number) => {
+    setPage(page);
+    fetchAds(page, limit);
+  }
+
+  const changeLimit = (limit: number) => {
+    setLimit(limit);
+    fetchAds(page, limit);
+  }
+
   return (
     <div className='container'>
+      <h1 className='visually-hidden'>DanAdds</h1>
       <Header modalActive={modalActive} setModalActive={setModalActive}/>
       <Ads ads={ads} isAdsLoading={isAdsLoading} adsError={adsError}/>
+      <Pagination totalPages={totalPages} page={page} changePage={changePage} />
+      <AdsLimit limit={limit} changeLimit={changeLimit}/>
       {adsError && <h1 style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>Произошла ошибка</h1>}
       <MyModal addNewAd={addNewAd} modalActive={modalActive} setModalActive={setModalActive}>
         <form>

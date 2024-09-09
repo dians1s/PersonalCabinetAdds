@@ -8,14 +8,16 @@ interface AdItemProps {
 const AdItem: React.FC<AdItemProps> = ({ ad }) => {
     return(
         <div className="content__ads__ad">
-            <img src={
-                ad.imageUrl
-                ? ad.imageUrl
-                : './icons/without_photo.svg'} 
-                className="content__ads__ad__photo"
-                alt={`${ad.name} logo`}
-                width={210}
-                loading="lazy"/>
+            <div className="content__ads__ad__photo">
+                <img src={
+                    ad.imageUrl
+                    ? ad.imageUrl
+                    : './icons/without_photo.svg'} 
+                    className="content__ads__ad__photo__img"
+                    alt={`${ad.name} logo`}
+                    width={210}
+                    loading="lazy"/>
+            </div>
             <h3 className="content__ads__ad__title">{ad.name}</h3>
             <table className="content__ads__ad__stats">
                 <tbody>

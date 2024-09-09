@@ -1,4 +1,4 @@
-@import 'normalize', 'variables', 'fonts', 'visually-hidden';
+@import 'normalize', 'variables', 'fonts', 'visually-hidden', 'noselect';
 
 body {
     font-family: 'Oswald', sans-serif;
@@ -86,6 +86,8 @@ body {
 
     &__filter {
         display: flex;
+        top: 50px;
+        position: sticky;
         flex-direction: column;
         justify-content: center;
         align-items: center;
@@ -117,10 +119,17 @@ body {
             background-color: var(--color-white-clear);
 
             &__photo {
-                vertical-align: middle;
+                display: flex;
+                align-items: center;
+                justify-content: center;
                 max-width: 100%;
-                height: auto;
+                height: 210px;
                 margin-bottom: 14px;
+
+                &__img {
+                    max-width: auto;
+                    height: auto;
+                }
             }
 
             &__title {
@@ -146,6 +155,54 @@ body {
                     justify-content: center;
                     align-items: center;
                     width: 20px;
+                }
+            }
+        }
+    }
+}
+
+.container {
+    &__wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 0px 20vw 40px calc(20vw + 230px + 30px);
+        text-align: end;
+        justify-content: end;
+        align-items: start;
+        gap: 10px 25px;
+
+        &__pages {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, 100px);
+            grid-auto-flow: column;
+            gap: 15px;
+    
+            &__title {
+                display: flex;
+                justify-content: center;
+                align-items: end;
+                width: 400px;
+                font-size: 24px;
+                height: 40px;
+                padding: 8px 15px;
+                white-space: nowrap;
+            }
+            
+            &__page {
+                background-color: var(--color-accent);
+                padding: 8px 15px;
+                min-width: 100px;
+                text-align: center;
+                border-radius: 24px;
+                cursor: pointer;
+                transition: var(--transition-default);
+    
+                &.current {
+                    background-color: var(--color-current-page);
+                }
+    
+                &:hover:not(.current) {
+                    background-color: var(--color-white-clear);
                 }
             }
         }
