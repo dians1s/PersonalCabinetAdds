@@ -28,10 +28,9 @@ const OrderStatus = {
     Refund: 6
 } as const;
 
-
 type OrderItem = Advertisment & { count: number; };
 
-type Order = {
+export type Order = {
     /* Уникальный идентификатор. */
     id: string;
     /* Статус. */

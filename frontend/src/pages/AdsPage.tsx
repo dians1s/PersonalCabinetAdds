@@ -9,26 +9,23 @@ import AdService from '../components/API/AdService';
 import { useFetching } from '../hooks/useFetching';
 import { getPageCount } from '../components/utils/pages';
 import Pagination from '../components/UI/pagination/Pagination';
-import AdsLimit from '../components/AdsLimit';
+import LimitPagination from '../components/LimitPagination';
 
-interface addNewAdProps {
-  imageUrl: string;
-  name: string;
-  description: string;
-  price: string;
+interface AdsPageProps {
+  modalActive: boolean;
+  setModalActive: (modalActive: boolean) => void;
 }
 
-const AdsPage = () => {
+const AdsPage: React.FC<AdsPageProps> = ({modalActive, setModalActive}) => {
 
   const [ads, setAds] = useState<Advertisment[]>([]);
-  const [modalActive, setModalActive] = useState(false);
   const [newAd, setNewAd] = useState({imageUrl: '', name: '', description: '', price: ''});
 
   const [totalPages, setTotalPages] = useState(0);
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
 
-  const [filter, setFilter] = useState({sort: '', query: ''});
+  const [filter, setFilter] = useState({sort: 'id', query: ''});
 
   const [fetchAds, isAdsLoading, adsError] = useFetching(async (page: number, limit: number, filter: {sort: string, query: string}) => {
     const response = await AdService.getAll(page, limit, filter);
@@ -38,49 +35,27 @@ const AdsPage = () => {
     setTotalPages(getPageCount(totalCount, limit));
   })
 
-  const addNewAd = async ({imageUrl, name, description, price}: addNewAdProps) => {
-    await fetch('http://localhost:3001/advertisements', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8'
-      },
-      body: JSON.stringify({
-          "name": name,
-          "description": description ? description : "",
-          "price": price,
-          "createdAt": new Date(),
-          "views": 0,
-          "likes": 0,
-          "imageUrl": imageUrl ? imageUrl: ""
-        })
-    });
-    if (ads.length < 10) {
-      setAds([...ads, {
-        "id": String(ads.length),
-        "name": name,
-        "description": description ? description : "",
-        "price": parseInt(price),
-        "createdAt": String(new Date()),
-        "views": 0,
-        "likes": 0,
-        "imageUrl": imageUrl ? imageUrl: ""
-      }]);
-    } else {
-      const response = await AdService.getAll(page, limit);
-      const totalCount = response.items;
-      setTotalPages(getPageCount(totalCount, limit));
-    }
-  }
+  
 
   useEffect(() => {
     fetchAds(page, limit, filter);
   }, [])
 
-  const sendNewAd = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const sendNewAd = async (e: React.MouseEvent<HTMLButtonElement>) => {
       e.preventDefault();
       if (!newAd.name) return 1;
       if (!newAd.price) return 1;
-      addNewAd(newAd);
+      await AdService.addNewAd(
+        newAd.imageUrl, 
+        newAd.name, 
+        newAd.description, 
+        newAd.price, 
+        ads, 
+        setAds, 
+        page, 
+        setTotalPages, 
+        limit
+      );
       setNewAd({imageUrl: '', name: '', description: '', price: ''});
       setModalActive(false);
   }
@@ -102,10 +77,10 @@ const AdsPage = () => {
 
   return (
     <>
-      <Ads ads={ads} isAdsLoading={isAdsLoading} adsError={adsError} filter={filter} setFilter={changeFilter} sortedAndSearchAds={ads}/>
+      <Ads ads={ads} isAdsLoading={isAdsLoading} adsError={adsError} filter={filter} setFilter={changeFilter} sortedAndSearchAds={ads.filter((ad) => ad.name.toLowerCase().includes(filter.query.toLowerCase()))}/>
       <Pagination totalPages={totalPages} page={page} changePage={changePage} />
-      <AdsLimit limit={limit} changeLimit={changeLimit}/>
-      <MyModal addNewAd={addNewAd} modalActive={modalActive} setModalActive={setModalActive}>
+      <LimitPagination limit={limit} changeLimit={changeLimit}/>
+      <MyModal modalActive={modalActive} setModalActive={setModalActive}>
         <form>
             <Input
                 value={newAd.imageUrl}
@@ -122,6 +97,7 @@ const AdsPage = () => {
                 id='description'
                 children=""
                 labelText='Описание:'
+                placeholder="Расскажите подробнее о товаре..."
                 value={newAd.description}
                 type='text'
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setNewAd({...newAd, description: e.target.value})}/>

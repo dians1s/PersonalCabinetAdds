@@ -2,15 +2,13 @@ import React from "react";
 import Input from "./UI/input/Input";
 import Select from "./UI/select/Select";
 
-interface AdFilterProps {
-    filter: {
-        sort: string;
-        query: string;
-    },
-    setFilter: (filter: { sort: string; query: string }) => void;
+interface FilterAndSearchProps {
+    filter: {sort: string, query: string};
+    setFilter: (filter: {sort: string, query: string}) => void;
+    [x: string]: any;
 }
 
-const AdFilter: React.FC<AdFilterProps> = ({filter, setFilter}) => {
+const FilterAndSearch: React.FC<FilterAndSearchProps> = ({filter, setFilter, children}) => {
     return(
     <div className="content__filter">
         <Input type='text' value={filter.query} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFilter({...filter, query: e.target.value})} placeholder='Поиск...' style={{marginBottom: '15px'}}/>
@@ -21,12 +19,9 @@ const AdFilter: React.FC<AdFilterProps> = ({filter, setFilter}) => {
             value={filter.sort}
             onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setFilter({...filter, sort: e.target.value})}
             style={{marginBottom: '15px'}}>
-            <option value="" disabled={true}>-</option>
-            <option value="price">Цене</option>
-            <option value="views">Просмотрам</option>
-            <option value="likes">Лайкам</option>
+            {children}
         </Select>
     </div>)
 }
 
-export default AdFilter;
+export default FilterAndSearch;

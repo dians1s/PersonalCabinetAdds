@@ -3,11 +3,10 @@ import Button from "./UI/button/Button";
 import { Link } from "react-router-dom";
 
 interface AdsItemProps {
-    modalActive: boolean;
-    setModalActive: (active: boolean) => void;
+    setModalActive: (modalActive: boolean) => void;
 }
 
-const Header: React.FC<AdsItemProps> = ({modalActive, setModalActive}) => {
+const Header: React.FC<AdsItemProps> = ({setModalActive}) => {
     return(
         <header className="header">
             <Link to="/ads" className="header__logo">

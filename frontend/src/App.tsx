@@ -10,9 +10,9 @@ const App = () => {
   return(
     <BrowserRouter>
       <div className='container'>
-      <h1 className='visually-hidden'>DanAdds</h1>
-      <Header modalActive={modalActive} setModalActive={setModalActive}/>
-      <AppRouter />
+        <h1 className='visually-hidden'>DanAdds</h1>
+        <Header setModalActive={setModalActive}/>
+        <AppRouter modalActive={modalActive} setModalActive={setModalActive}/>
       </div>
     </BrowserRouter>
   )

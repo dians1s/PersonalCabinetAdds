@@ -5,7 +5,7 @@ interface AdsLimitProps {
     changeLimit: (limit: number) => void;
 }
 
-const AdsLimit: React.FC<AdsLimitProps> = ({limit, changeLimit}) => {
+const LimitPagination: React.FC<AdsLimitProps> = ({limit, changeLimit}) => {
 
     const LimitsList = [3, 10, 30, 50];
 
@@ -27,4 +27,4 @@ const AdsLimit: React.FC<AdsLimitProps> = ({limit, changeLimit}) => {
     )
 }
 
-export default AdsLimit;
+export default LimitPagination;

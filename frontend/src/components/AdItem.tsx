@@ -12,9 +12,7 @@ const AdItem: React.FC<AdItemProps> = ({ ad }) => {
 
     const getPath = (event: React.MouseEvent<HTMLDivElement>) => {
         event.preventDefault();
-        
         navigate(`${ad.id}`, {replace: false});
-        
         return true;
     }
 

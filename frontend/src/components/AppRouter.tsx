@@ -5,13 +5,17 @@ import OrdersPage from "../pages/OrdersPage";
 import Error404 from "../pages/Error404";
 import AdPage from "../pages/AdPage";
 
-const AppRouter = () => {
+interface AppRouterProps {
+    modalActive: boolean;
+    setModalActive: (modalActive: boolean) => void;
+}
 
+const AppRouter: React.FC<AppRouterProps> = ({modalActive, setModalActive}) => {
     return(
     <Routes>
-        <Route path="/ads" element={<AdsPage />} />
+        <Route path="/ads" element={<AdsPage modalActive={modalActive} setModalActive={setModalActive}/>} />
         <Route path="/ads/:id" element={<AdPage />} />
-        <Route path="/orders" element={<OrdersPage />} />
+        <Route path="/orders" element={<OrdersPage modalActive={modalActive} setModalActive={setModalActive} />} />
         <Route path="*" element={<Error404 />} />
     </Routes>
     )
