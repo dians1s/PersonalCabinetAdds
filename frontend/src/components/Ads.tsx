@@ -1,20 +1,19 @@
-import React, { useState } from "react";
+import React from "react";
 import { Advertisment } from '../types/types';
 import AdFilter from "./AdFilter";
 import AdList from "./AdList";
-import { useAds } from "../hooks/useAds";
 import Loader from "./UI/Loader/Loader";
 
 interface AdsItemProps {
     ads: Advertisment[];
     isAdsLoading: boolean;
     adsError: string;
+    filter: {sort: string, query: string};
+    setFilter: (filter: {sort: string, query: string}) => void;
+    sortedAndSearchAds: Advertisment[];
 }
 
-const Ads: React.FC<AdsItemProps> = ({ads, isAdsLoading, adsError}) => {
-
-    const [filter, setFilter] = useState({sort: '', query: ''});
-    const sortedAndSearchAds = useAds(ads, filter.sort, filter.query);
+const Ads: React.FC<AdsItemProps> = ({ads, isAdsLoading, adsError, filter, setFilter, sortedAndSearchAds}) => {
 
     return(
         <div className="content">

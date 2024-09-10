@@ -7,6 +7,7 @@ body {
 
 * {
     color: var(--color-white);
+    scroll-behavior: smooth;
 }
 
 .is-current::before {
@@ -206,5 +207,18 @@ body {
                 }
             }
         }
+    }
+}
+
+.error404 {
+    display: flex;
+    flex-direction: column;
+    font-size: 48px;
+    justify-content: center;
+    align-items: center;
+    padding-top: 20vh;
+
+    &__title {
+        color: var(--color-error);
     }
 }

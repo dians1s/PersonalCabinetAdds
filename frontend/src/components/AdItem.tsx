@@ -1,13 +1,25 @@
 import React from "react";
 import { Advertisment } from '../types/types';
+import { useNavigate } from "react-router-dom";
 
 interface AdItemProps {
     ad: Advertisment;
 }
 
 const AdItem: React.FC<AdItemProps> = ({ ad }) => {
+
+    const navigate = useNavigate();
+
+    const getPath = (event: React.MouseEvent<HTMLDivElement>) => {
+        event.preventDefault();
+        
+        navigate(`${ad.id}`, {replace: false});
+        
+        return true;
+    }
+
     return(
-        <div className="content__ads__ad">
+        <div onClick={(event) => getPath(event)} className="content__ads__ad">
             <div className="content__ads__ad__photo">
                 <img src={
                     ad.imageUrl

@@ -78,36 +78,6 @@
       "imageUrl": ""
     },
     {
-      "id": "13d7",
-      "name": "Проверка",
-      "description": "Dhahasd",
-      "price": "",
-      "createdAt": "2024-09-08T14:32:00.907Z",
-      "views": 0,
-      "likes": 0,
-      "imageUrl": ""
-    },
-    {
-      "id": "970a",
-      "name": "",
-      "description": "",
-      "price": "",
-      "createdAt": "2024-09-08T14:32:29.374Z",
-      "views": 0,
-      "likes": 0,
-      "imageUrl": ""
-    },
-    {
-      "id": "e378",
-      "name": "asd",
-      "description": "",
-      "price": "",
-      "createdAt": "2024-09-08T14:32:30.369Z",
-      "views": 0,
-      "likes": 0,
-      "imageUrl": ""
-    },
-    {
       "id": "5b66",
       "name": "Asd",
       "description": "",
@@ -203,7 +173,7 @@
       "description": "Тест",
       "price": "5125",
       "createdAt": "2024-09-09T11:00:06.687Z",
-      "views": 0,
+      "views": 4000,
       "likes": 0,
       "imageUrl": ""
     }
