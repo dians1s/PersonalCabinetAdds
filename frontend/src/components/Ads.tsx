@@ -23,6 +23,7 @@ const Ads: React.FC<AdsItemProps> = ({ads, isAdsLoading, adsError, filter, setFi
                 ? <div style={{width: '100%', minHeight: '50vh', display: 'flex', justifyContent: 'center', alignItems: 'center'}}><Loader /></div>
                 : <AdList ads={sortedAndSearchAds} adsError={adsError}/>
             }
+            {adsError && <h3 style={{display: 'flex', justifyContent: 'center', alignItems: 'center', fontSize: '36px', textAlign: 'center', width: '100%', color: '#da0d0d'}}>Произошла ошибка при загрузке данных</h3>}
             
         </div>
     )

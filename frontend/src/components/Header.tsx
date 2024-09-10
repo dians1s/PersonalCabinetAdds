@@ -22,7 +22,7 @@ const Header: React.FC<AdsItemProps> = ({modalActive, setModalActive}) => {
                     <li className="header__nav__item is-current">
                         <Link to="/ads">Объявления</Link>
                     </li>
-                    <li className="header__nav__item">
+                    <li className="header__nav__item is-current">
                         <Link to="/orders">Заказы</Link>
                     </li>
                 </ul>

@@ -105,7 +105,6 @@ const AdsPage = () => {
       <Ads ads={ads} isAdsLoading={isAdsLoading} adsError={adsError} filter={filter} setFilter={changeFilter} sortedAndSearchAds={ads}/>
       <Pagination totalPages={totalPages} page={page} changePage={changePage} />
       <AdsLimit limit={limit} changeLimit={changeLimit}/>
-      {adsError && <h1 style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>Произошла ошибка</h1>}
       <MyModal addNewAd={addNewAd} modalActive={modalActive} setModalActive={setModalActive}>
         <form>
             <Input
