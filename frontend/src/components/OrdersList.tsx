@@ -5,9 +5,10 @@ import OrderItem from "./OrderItem";
 interface OrdersListProps {
     orders: Order[];
     ordersError: string;
+    changeOrderStatus: (orderId: string, newFinishedAt: string) => void;
 }
 
-const OrdersList: React.FC<OrdersListProps> = ({orders, ordersError}) => {
+const OrdersList: React.FC<OrdersListProps> = ({orders, ordersError, changeOrderStatus}) => {
 
     if (!orders.length) {
         return(<>
@@ -18,7 +19,7 @@ const OrdersList: React.FC<OrdersListProps> = ({orders, ordersError}) => {
 
     return(
     <div className="content__orders">
-        {orders.map((order: Order) => <OrderItem key={order.id} order={order}/> )}
+        {orders.map((order: Order) => <OrderItem key={order.id} order={order} changeOrderStatus={changeOrderStatus}/> )}
     </div>)
 }
 

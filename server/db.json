@@ -76,114 +76,14 @@
       "views": 200000,
       "likes": 302,
       "imageUrl": ""
-    },
-    {
-      "id": "5b66",
-      "name": "Asd",
-      "description": "",
-      "price": "100",
-      "createdAt": "2024-09-08T14:33:56.915Z",
-      "views": 0,
-      "likes": 0,
-      "imageUrl": ""
-    },
-    {
-      "id": "b634",
-      "name": "Нащзвание",
-      "description": "Описание",
-      "price": "1500",
-      "createdAt": "2024-09-08T15:20:57.948Z",
-      "views": 0,
-      "likes": 0,
-      "imageUrl": ""
-    },
-    {
-      "id": "9c67",
-      "name": "Тестирование",
-      "description": "Описания",
-      "price": "150000124",
-      "createdAt": "2024-09-08T16:03:09.546Z",
-      "views": 0,
-      "likes": 0,
-      "imageUrl": ""
-    },
-    {
-      "id": "5598",
-      "name": "Тестирование2",
-      "description": "ОЛписание2",
-      "price": "20032",
-      "createdAt": "2024-09-08T16:03:43.086Z",
-      "views": 0,
-      "likes": 0,
-      "imageUrl": ""
-    },
-    {
-      "id": "42b1",
-      "name": "Названиеиеиеие",
-      "description": "Иаеиааи",
-      "price": "152",
-      "createdAt": "2024-09-08T16:05:16.152Z",
-      "views": 0,
-      "likes": 0,
-      "imageUrl": ""
-    },
-    {
-      "id": "1a0e",
-      "name": "Названиекрутое",
-      "description": "И описание",
-      "price": "15",
-      "createdAt": "2024-09-08T16:10:14.132Z",
-      "views": 0,
-      "likes": 0,
-      "imageUrl": ""
-    },
-    {
-      "id": "c8d0",
-      "name": "Тестинг",
-      "description": "Description",
-      "price": "15422",
-      "createdAt": "2024-09-09T07:45:39.118Z",
-      "views": 0,
-      "likes": 0,
-      "imageUrl": ""
-    },
-    {
-      "id": "cb47",
-      "name": "Названияяяя",
-      "description": "Описания",
-      "price": "5",
-      "createdAt": "2024-09-09T07:46:48.420Z",
-      "views": 0,
-      "likes": 0,
-      "imageUrl": ""
-    },
-    {
-      "id": "256f",
-      "name": "Фото моря",
-      "description": "Фотография и вс",
-      "price": "500",
-      "createdAt": "2024-09-09T08:05:22.361Z",
-      "views": 0,
-      "likes": 0,
-      "imageUrl": "https://mir-s3-cdn-cf.behance.net/project_modules/max_3840/1f157a82172987.5d3544c355668.jpg"
-    },
-    {
-      "id": "20d6",
-      "name": "ТестОбъявление",
-      "description": "Тест",
-      "price": "5125",
-      "createdAt": "2024-09-09T11:00:06.687Z",
-      "views": 4000,
-      "likes": 0,
-      "imageUrl": ""
     }
   ],
   "orders": [
     {
       "id": "1",
-      "status": 0,
+      "status": 4,
       "createdAt": "2024-08-12T20:20:55.351Z",
-      "finishedAt": "",
+      "finishedAt": "2024-09-11T10:12:23.953Z",
       "total": 314000,
       "deliveryWay": "mail",
       "items": [
@@ -212,9 +112,9 @@
     },
     {
       "id": "2",
-      "status": 4,
+      "status": 2,
       "createdAt": "2024-08-12T20:20:55.351Z",
-      "finishedAt": "2024-08-12T20:25:55.351Z",
+      "finishedAt": "",
       "total": 33000,
       "deliveryWay": "sdek",
       "items": [

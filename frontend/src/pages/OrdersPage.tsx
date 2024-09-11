@@ -27,15 +27,16 @@ const OrdersPage: React.FC<OrdersPageProps> = ({modalActive, setModalActive}) =>
     const [limit, setLimit] = useState(10);
 
     const [filter, setFilter] = useState({sort: 'id', query: ''});
+    const [status, setStatus] = useState('');
 
-    const [fetchOrders, isOrdersLoading, ordersError] = useFetching(async (page: number, limit: number, filter: {sort: string, query: string}) => {
-        const response = await OrderService.getAll(page, limit, filter);
-        console.log(response.data);
-        
+    const [fetchOrders, isOrdersLoading, ordersError] = useFetching(async (page: number, limit: number, filter: {sort: string, query: string}, status) => {
+        const response = await OrderService.getAll(page, limit, filter, status);
+
         setOrders(response.data);
         const totalCount = response.items;
         setTotalPages(getPageCount(totalCount, limit));
     });
+    console.log(orders);
     
     const sendNewAd = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
@@ -52,22 +53,32 @@ const OrdersPage: React.FC<OrdersPageProps> = ({modalActive, setModalActive}) =>
     }
 
     useEffect(() => {
-        fetchOrders(page, limit, filter);
-    }, [])
+        fetchOrders(page, limit, filter, status);
+    }, [page, limit, filter, status])
 
     const changePage = (page: number) => {
         setPage(page);
-        fetchOrders(page, limit, filter);
     }
 
     const changeLimit = (limit: number) => {
         setLimit(limit);
-        fetchOrders(page, limit, filter);
+    }
+
+    const changeFilter = (filter: {sort: string, query: string}) => {
+        setFilter(filter);
+    }
+
+    const changeStatus = (newStatus: string) => {
+        setStatus(newStatus);
+    }
+
+    const changeOrderStatus = (orderId: string, newFinishedAt: string) => {
+        setOrders(ordersList => ordersList.map(orderItem => orderItem.id === orderId ? {...orderItem, finishedAt: newFinishedAt, status: 4 } : orderItem));
     }
 
     return(
     <>
-        <Orders filter={filter} setFilter={setFilter} isOrdersLoading={isOrdersLoading} orders={orders} ordersError={ordersError} />
+        <Orders filter={filter} setFilter={changeFilter} isOrdersLoading={isOrdersLoading} orders={orders} ordersError={ordersError} status={status} setStatus={changeStatus} changeOrderStatus={changeOrderStatus}/>
         <Pagination totalPages={totalPages} page={page} changePage={changePage}/>
         <LimitPagination limit={limit} changeLimit={changeLimit} />
         <MyModal modalActive={modalActive} setModalActive={setModalActive}>

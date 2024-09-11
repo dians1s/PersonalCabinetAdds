@@ -31,11 +31,12 @@ const AdPage = () => {
         }
     }, [])
 
-    return(<>
+    return(<div className="content">
+            <h2 className="visually-hidden">объявления {ad.name}</h2>
             {isLoading
-            ? <Loader />
+            ? <div style={{ width: '100%', minHeight: '50vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}><Loader /></div>
             : <AdCard error={error} ad={ad}/> }
-        </>
+        </div>
     )
 }
 

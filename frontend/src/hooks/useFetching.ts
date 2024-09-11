@@ -1,9 +1,9 @@
 import { useState } from "react"
 
-type Callback = (page: number, limit: number, filter: {sort: string, query: string}) => Promise<void>;
+type Callback = (page: number, limit: number, filter: {sort: string, query: string}, status?: string) => Promise<void>;
 type CallbackById = (id: string) => Promise<void>;
 
-export const useFetching = (callback: Callback): [(page: number, limit: number, filter: {sort: string, query: string}) => Promise<void>, boolean, string] => {
+export const useFetching = (callback: Callback): [(page: number, limit: number, filter: {sort: string, query: string}, status?: string) => Promise<void>, boolean, string] => {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState('');
 
@@ -15,7 +15,9 @@ export const useFetching = (callback: Callback): [(page: number, limit: number, 
             if (e instanceof Error) setError(e.message);
             else setError('Catch unknown error.');
         } finally {
-            setIsLoading(false);
+            setTimeout(() => {
+                setIsLoading(false);
+            }, 1000);
         }
     }
 
@@ -34,7 +36,9 @@ export const useFetchingById = (callback: CallbackById): [(id: string) => Promis
             if (e instanceof Error) setError(e.message);
             else setError('Catch unknown error.');
         } finally {
-            setIsLoading(false);
+            setTimeout(() => {
+                setIsLoading(false);
+            }, 1000);
         }
     }
 

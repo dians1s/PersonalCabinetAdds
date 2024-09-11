@@ -13,6 +13,7 @@ interface AppRouterProps {
 const AppRouter: React.FC<AppRouterProps> = ({modalActive, setModalActive}) => {
     return(
     <Routes>
+        <Route path="/" element={<AdsPage modalActive={modalActive} setModalActive={setModalActive}/>} /> {/* Можно изменить на главную страницу */}
         <Route path="/ads" element={<AdsPage modalActive={modalActive} setModalActive={setModalActive}/>} />
         <Route path="/ads/:id" element={<AdPage />} />
         <Route path="/orders" element={<OrdersPage modalActive={modalActive} setModalActive={setModalActive} />} />

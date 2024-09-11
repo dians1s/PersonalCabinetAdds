@@ -33,11 +33,11 @@ const AdItem: React.FC<AdItemProps> = ({ ad }) => {
                 <tbody>
                     <tr>
                         <th>Цена:</th>
-                        <td>{ad.price}&nbsp;<div className="content__ads__ad__stats__container">₽</div></td>
+                        <td>{ad.price.toLocaleString()}&nbsp;<div className="content__ads__ad__stats__container">₽</div></td>
                     </tr>
                     <tr>
                         <th>Просмотры:</th>
-                        <td>{ad.views}&nbsp;
+                        <td>{ad.views.toLocaleString()}&nbsp;
                             <div className="content__ads__ad__stats__container">
                                 <img src="./icons/view.svg" alt="" />
                             </div>
@@ -45,7 +45,7 @@ const AdItem: React.FC<AdItemProps> = ({ ad }) => {
                     </tr>
                     <tr>
                         <th>Лайки:</th>
-                        <td>{ad.likes}&nbsp;
+                        <td>{ad.likes.toLocaleString()}&nbsp;
                             <div className="content__ads__ad__stats__container">
                                 <img src="./icons/likes.svg" alt="" />
                             </div>

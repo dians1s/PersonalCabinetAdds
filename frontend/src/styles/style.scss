@@ -118,6 +118,7 @@ body {
             flex-direction: column;
             padding: 25px;
             background-color: var(--color-white-clear);
+            cursor: pointer;
 
             &__photo {
                 display: flex;
@@ -158,6 +159,84 @@ body {
                     width: 20px;
                 }
             }
+        }
+    }
+    &__orders {
+        min-width: 45.6vw;
+        height: 100%;
+
+        &__order {
+            background-color: var(--color-white-clear);
+            padding: 25px 35px;
+            margin-bottom: 25px;
+
+            &__title {
+                font-size: 28px;
+                margin-bottom: 15px;
+            }
+
+            &__details{
+                &__list {
+                    font-size: 18px;
+                }
+                &__item {
+                    margin-bottom: 4px;
+                }
+            }
+            &__list {
+                display: flex;
+                padding: 25px 25px;
+                background-color: var(--color-dark);
+                overflow: auto;
+                font-size: 18px;
+                margin-bottom: 24px;
+
+                &__title {
+                    font-size: 18px;
+                    margin-bottom: 4px;
+                }
+            }
+
+            &__item {
+                background-color: var(--color-white-clear);
+                padding: 10px 15px;
+                cursor: pointer;
+
+
+                &__photo {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    margin-bottom: 8px;
+                }
+
+                &__item {
+                    &:first-child {
+                        font-size: 24px;
+                        margin-bottom: 12px;
+                    }
+
+                    text-wrap: nowrap;
+                }
+
+                &:not(:last-child) {
+                    margin-right: 15px;
+                }
+            }
+        }
+    }
+    
+    &__adcard {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &__list {
+            width: 750px;
+            height: auto;
+            overflow: auto;
+            padding: 30px;
         }
     }
 }

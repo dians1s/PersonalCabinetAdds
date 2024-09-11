@@ -2,14 +2,20 @@ import React from "react";
 import classes from './Select.module.scss'
 
 interface MySelect {
+    defaultValue: {value: string, name: string};
+    options: {value: string, name: string}[];
     [x: string]: any;
-    children: any;
 }
 
-const Select: React.FC<MySelect> = ({children, ...props}) => {
+const Select: React.FC<MySelect> = ({defaultValue, options, ...props}) => {
     return(
         <select {...props} className={classes.select}>
-            {children}
+            <option value={defaultValue.value}>{defaultValue.name}</option>
+            {options.map(option =>
+                <option key={option.value} value={option.value}>
+                    {option.name}
+                </option>
+            )}
         </select>
     )
 };

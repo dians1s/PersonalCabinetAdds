@@ -18,11 +18,15 @@ const Ads: React.FC<AdsItemProps> = ({ ads, isAdsLoading, adsError, filter, setF
     return (
         <div className="content">
             <h2 className="visually-hidden">Мои объявления</h2>
-            <FilterAndSearch filter={filter} setFilter={setFilter}>
-                <option value="id">Без сортировки</option>
-                <option value="price">По цене</option>
-                <option value="views">Просмотрам</option>
-                <option value="likes">Лайкам</option>
+            <FilterAndSearch
+            filter={filter}
+            setFilter={setFilter}
+            defaultValue={{value: 'id', name: 'Без сортировки'}}
+            options={[
+            {value: 'price', name:'По цене'},
+            {value: 'views', name:'Просмотрам'},
+            {value: 'likes', name:'Лайкам'},
+            ]} >
             </FilterAndSearch>
             {isAdsLoading
                 ? <div style={{ width: '100%', minHeight: '50vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}><Loader /></div>
