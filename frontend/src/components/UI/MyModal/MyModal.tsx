@@ -15,7 +15,6 @@ const MyModal: React.FC<MyModalProps> = ({modalActive, setModalActive, children}
     if (modalActive) { 
         rootClasses.push(classes.active);
         childrenClasses.push(classes.active);
-        console.log(modalActive === true);
     }
     
     return(

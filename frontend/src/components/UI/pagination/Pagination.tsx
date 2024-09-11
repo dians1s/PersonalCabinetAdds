@@ -13,16 +13,16 @@ const Pagination: React.FC<PaginationProps> = ({totalPages, page, changePage}) =
       
           <h2 className="container__wrapper__title">Страница:</h2>
 
-          <div className="container__wrapper__pages">
+          <ul className="container__wrapper__list">
           {pagesArray.map(p => 
-            <span 
+            <li 
             onClick={() => changePage(p)}
             key={p}
-            className={page === p ? 'container__wrapper__pages__page current noselect' : 'container__wrapper__pages__page noselect'}>
+            className={page === p ? 'container__wrapper__item current noselect' : 'container__wrapper__item noselect'}>
               {p}
-            </span>)
+            </li>)
           }
-        </div>
+        </ul>
       </div>)
 }
 

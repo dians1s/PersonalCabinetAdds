@@ -77,7 +77,7 @@ const OrderItem: React.FC<AdItemProps> = ({order, changeOrderStatus}) => {
         <h3 className="content__orders__order__list__title">Товары:</h3>
         <ul className="content__orders__order__list">
             {order.items.map((item) => 
-            <OrderItemList item={item} />)}
+            <OrderItemList key={item.id} item={item} />)}
         </ul>
         {!order.finishedAt ? <Button onClick={() => finishOrder(order.id)}>Завершить заказ</Button>
         : ''}

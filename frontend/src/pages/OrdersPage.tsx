@@ -15,9 +15,10 @@ import AdService from "../components/API/AdService";
 interface OrdersPageProps {
     modalActive: boolean;
     setModalActive: (modalActive: boolean) => void;
+    setActivePage: (activePage: string) => void;
 }
 
-const OrdersPage: React.FC<OrdersPageProps> = ({modalActive, setModalActive}) => {
+const OrdersPage: React.FC<OrdersPageProps> = ({modalActive, setModalActive, setActivePage}) => {
 
     const [orders, setOrders] = useState<Order[]>([]);
     const [newAd, setNewAd] = useState({imageUrl: '', name: '', description: '', price: ''});
@@ -36,7 +37,6 @@ const OrdersPage: React.FC<OrdersPageProps> = ({modalActive, setModalActive}) =>
         const totalCount = response.items;
         setTotalPages(getPageCount(totalCount, limit));
     });
-    console.log(orders);
     
     const sendNewAd = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
@@ -46,7 +46,7 @@ const OrdersPage: React.FC<OrdersPageProps> = ({modalActive, setModalActive}) =>
           newAd.imageUrl, 
           newAd.name, 
           newAd.description, 
-          newAd.price
+          parseInt(newAd.price)
         );
         setNewAd({imageUrl: '', name: '', description: '', price: ''});
         setModalActive(false);
@@ -54,7 +54,12 @@ const OrdersPage: React.FC<OrdersPageProps> = ({modalActive, setModalActive}) =>
 
     useEffect(() => {
         fetchOrders(page, limit, filter, status);
-    }, [page, limit, filter, status])
+    }, [page, limit, filter, status]);
+
+    useEffect(() => {
+        document.title = 'Заказы';
+        setActivePage('orders');
+    })
 
     const changePage = (page: number) => {
         setPage(page);
@@ -80,7 +85,7 @@ const OrdersPage: React.FC<OrdersPageProps> = ({modalActive, setModalActive}) =>
     <>
         <Orders filter={filter} setFilter={changeFilter} isOrdersLoading={isOrdersLoading} orders={orders} ordersError={ordersError} status={status} setStatus={changeStatus} changeOrderStatus={changeOrderStatus}/>
         <Pagination totalPages={totalPages} page={page} changePage={changePage}/>
-        <LimitPagination limit={limit} changeLimit={changeLimit} />
+        <LimitPagination limit={limit} changeLimit={changeLimit} name='заказов'/>
         <MyModal modalActive={modalActive} setModalActive={setModalActive}>
             <form>
                 <Input

@@ -14,9 +14,10 @@ import LimitPagination from '../components/LimitPagination';
 interface AdsPageProps {
   modalActive: boolean;
   setModalActive: (modalActive: boolean) => void;
+  setActivePage: (activePage: string) => void;
 }
 
-const AdsPage: React.FC<AdsPageProps> = ({modalActive, setModalActive}) => {
+const AdsPage: React.FC<AdsPageProps> = ({modalActive, setModalActive, setActivePage}) => {
 
   const [ads, setAds] = useState<Advertisment[]>([]);
   const [newAd, setNewAd] = useState({imageUrl: '', name: '', description: '', price: ''});
@@ -35,10 +36,10 @@ const AdsPage: React.FC<AdsPageProps> = ({modalActive, setModalActive}) => {
     setTotalPages(getPageCount(totalCount, limit));
   })
 
-  
-
   useEffect(() => {
     fetchAds(page, limit, filter);
+    document.title = 'Объявления';
+    setActivePage('ads');
   }, [])
 
   const sendNewAd = async (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -49,7 +50,7 @@ const AdsPage: React.FC<AdsPageProps> = ({modalActive, setModalActive}) => {
         newAd.imageUrl, 
         newAd.name, 
         newAd.description, 
-        newAd.price, 
+        parseInt(newAd.price), 
         ads, 
         setAds, 
         page, 
@@ -58,6 +59,7 @@ const AdsPage: React.FC<AdsPageProps> = ({modalActive, setModalActive}) => {
       );
       setNewAd({imageUrl: '', name: '', description: '', price: ''});
       setModalActive(false);
+      fetchAds(page, limit, filter);
   }
 
   const changePage = (page: number) => {
@@ -79,7 +81,7 @@ const AdsPage: React.FC<AdsPageProps> = ({modalActive, setModalActive}) => {
     <>
       <Ads ads={ads} isAdsLoading={isAdsLoading} adsError={adsError} filter={filter} setFilter={changeFilter} sortedAndSearchAds={ads.filter((ad) => ad.name.toLowerCase().includes(filter.query.toLowerCase()))}/>
       <Pagination totalPages={totalPages} page={page} changePage={changePage} />
-      <LimitPagination limit={limit} changeLimit={changeLimit}/>
+      <LimitPagination limit={limit} changeLimit={changeLimit} name='объявлений'/>
       <MyModal modalActive={modalActive} setModalActive={setModalActive}>
         <form>
             <Input

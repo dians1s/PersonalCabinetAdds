@@ -15,7 +15,7 @@ export default class AdService {
     static async addNewAd(imageUrl: string, 
                           name: string, 
                           description: string, 
-                          price: string, 
+                          price: number, 
                           ads: Advertisment[], 
                           setAds: (ad: Advertisment[]) => void, 
                           page: number, 
@@ -36,28 +36,28 @@ export default class AdService {
               "imageUrl": imageUrl ? imageUrl: ""
             })
         });
-        if (ads.length < 10) {
-          setAds([...ads, {
-            "id": String(ads.length),
-            "name": name,
-            "description": description ? description : "",
-            "price": parseInt(price),
-            "createdAt": String(new Date()),
-            "views": 0,
-            "likes": 0,
-            "imageUrl": imageUrl ? imageUrl: ""
-          }]);
-        } else {
-          const response = await AdService.getAll(page, limit);
-          const totalCount = response.items;
-          setTotalPages(getPageCount(totalCount, limit));
-        }
+        // if (ads.length < 10) {
+        //   setAds([...ads, {
+        //     "id": String(ads.length),
+        //     "name": name,
+        //     "description": description ? description : "",
+        //     "price": parseInt(price),
+        //     "createdAt": String(new Date()),
+        //     "views": 0,
+        //     "likes": 0,
+        //     "imageUrl": imageUrl ? imageUrl: ""
+        //   }]);
+        // } else {
+        //   const response = await AdService.getAll(page, limit);
+        //   const totalCount = response.items;
+        //   setTotalPages(getPageCount(totalCount, limit));
+        // }
     }
 
     static async addNewAdAnotherPage(imageUrl: string, 
                           name: string, 
                           description: string, 
-                          price: string) {
+                          price: number) {
         await fetch('http://localhost:3001/advertisements', {
           method: 'POST',
           headers: {

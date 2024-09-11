@@ -3,26 +3,27 @@ import React from "react";
 interface AdsLimitProps {
     limit: number;
     changeLimit: (limit: number) => void;
+    name: string;
 }
 
-const LimitPagination: React.FC<AdsLimitProps> = ({limit, changeLimit}) => {
+const LimitPagination: React.FC<AdsLimitProps> = ({limit, changeLimit, name}) => {
 
     const LimitsList = [3, 10, 30, 50];
 
     return(<div className="container__wrapper">
         
-        <h2 className="container__wrapper__pages__title">Количество объявлений на странице:</h2>
+        <h2 className="container__wrapper__title">Количество {name}:</h2>
 
-        <div className="container__wrapper__pages">
+        <ul className="container__wrapper__list">
             {LimitsList.map(number => 
-            <span
+            <li
             onClick={() => changeLimit(number)}
             key={number}
-            className={limit === number ? 'container__wrapper__pages__page current noselect' : 'container__wrapper__pages__page noselect'}>
+            className={limit === number ? 'container__wrapper__item current noselect' : 'container__wrapper__item noselect'}>
                 {number}
-            </span>)
+            </li>)
             }
-        </div>
+        </ul>
       </div>
     )
 }
