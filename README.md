@@ -92,6 +92,24 @@
 
 По стандарту обращение к API идет через "http://localhost:3001/", но вы можете поменять это в следующей директории => "./frontend/src/components/API" => в файлах AdService.ts и OrderService.ts необходимо заменить ссылки на свои.
 
+## Инструкция по запуску:
+
+ВАЖНО: У вас должны быть установлены [зависимости проекта](https://github.com/dians1s/PersonalCabinetAdds#зависимости) и изменены настройки (см. выше, если у вас занят 3000 и 3001 порт).
+
+1. Необходимо склонировать репозиторий
+
+`git clone https://github.com/dians1s/PersonalCabinetAdds.git`
+
+2. Запуск API json-server
+
+`cd ./server/`
+`npm run server`
+
+3. Можете запускать проект
+
+`cd ./frontend/`
+`npm run start`
+
 ## Поддержка
 
 Если у вас возникли какие-либо проблемы или вопросы по использованию, создайте [обсуждение](https://github.com/dians1s/PersonalCabinetAdds/issues/new/choose) в данном репозитории или напишите на электронную почту <danis11255@gmail.com>.
