@@ -248,6 +248,10 @@ body {
             overflow: auto;
             padding: 30px;
 
+            & li {
+                overflow-wrap: anywhere;
+            }
+
             &__wrapper {
                 width: 50%;
                 padding: 14px;
@@ -336,25 +340,6 @@ body {
                 background-color: var(--color-white-clear);
             }
         }
-            
-        //     &__page {
-        //         background-color: var(--color-accent);
-        //         padding: 8px 15px;
-        //         min-width: 100px;
-        //         text-align: center;
-        //         border-radius: 24px;
-        //         cursor: pointer;
-        //         transition: var(--transition-default);
-    
-        //         &.current {
-        //             background-color: var(--color-current-page);
-        //         }
-    
-        //         &:hover:not(.current) {
-        //             background-color: var(--color-white-clear);
-        //         }
-        //     }
-        // }
     }
 }
 

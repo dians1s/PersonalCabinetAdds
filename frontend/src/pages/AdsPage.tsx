@@ -40,6 +40,7 @@ const AdsPage: React.FC<AdsPageProps> = ({modalActive, setModalActive, setActive
     fetchAds(page, limit, filter);
     document.title = 'Объявления';
     setActivePage('ads');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const sendNewAd = async (e: React.MouseEvent<HTMLButtonElement>) => {

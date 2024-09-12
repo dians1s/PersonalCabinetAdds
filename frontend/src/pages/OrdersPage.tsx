@@ -54,6 +54,7 @@ const OrdersPage: React.FC<OrdersPageProps> = ({modalActive, setModalActive, set
 
     useEffect(() => {
         fetchOrders(page, limit, filter, status);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [page, limit, filter, status]);
 
     useEffect(() => {

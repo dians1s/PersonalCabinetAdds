@@ -51,19 +51,24 @@ const AdPage: React.FC<AdPageProps> = ({modalActive, setModalActive, setActivePa
         setModalActive(false);
     }
 
+    const editActiveAd = (name: string, description: string, price: number, imageUrl: string) => {
+        setAd({...ad, name, description, price, imageUrl});
+    }
+
     useEffect(() => {
         if (params.id) {
             fetchAdById(params.id);
         }
         document.title = ad.name;
         setActivePage('ads');
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return(<div className="content">
             <h2 className="visually-hidden">Объявления {ad.name}</h2>
             {isLoading
             ? <div style={{ width: '100%', minHeight: '50vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}><Loader /></div>
-            : <AdCard error={error} ad={ad}/> }
+            : <AdCard error={error} ad={ad} editActiveAd={editActiveAd} />}
             <MyModal modalActive={modalActive} setModalActive={setModalActive}>
                 <form>
                     <Input

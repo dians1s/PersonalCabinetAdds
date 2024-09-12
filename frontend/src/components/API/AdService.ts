@@ -1,5 +1,4 @@
 import { Advertisment } from "../../types/types";
-import { getPageCount } from "../utils/pages";
 
 export default class AdService {
     static async getAll(page = 1, limit = 10, filter = {sort: '', query: ''}) {
@@ -36,22 +35,6 @@ export default class AdService {
               "imageUrl": imageUrl ? imageUrl: ""
             })
         });
-        // if (ads.length < 10) {
-        //   setAds([...ads, {
-        //     "id": String(ads.length),
-        //     "name": name,
-        //     "description": description ? description : "",
-        //     "price": parseInt(price),
-        //     "createdAt": String(new Date()),
-        //     "views": 0,
-        //     "likes": 0,
-        //     "imageUrl": imageUrl ? imageUrl: ""
-        //   }]);
-        // } else {
-        //   const response = await AdService.getAll(page, limit);
-        //   const totalCount = response.items;
-        //   setTotalPages(getPageCount(totalCount, limit));
-        // }
     }
 
     static async addNewAdAnotherPage(imageUrl: string, 
